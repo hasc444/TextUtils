@@ -57,7 +57,7 @@ export default function TextForm(props) {
   return (
     <>
     <div className="container" style={{color: props.mode==='dark'?'white':'black'}}>
-    <h1>{props.heading}</h1>
+    <h2 className='mb-2 '>{props.heading}</h2>
 
     <div className="mb-3">        
         <textarea className="form-control" value={text} style={{backgroundColor: props.mode==='dark'?'#1f253f':'white',
@@ -65,18 +65,18 @@ export default function TextForm(props) {
         }} onChange={handleChange} id="myBox" rows="8"></textarea>
     </div>
 
-    <button className="btn btn-info" onClick={handleClick}>Convert to Uppercase</button>
-    <button className="btn btn-info mx-2" onClick={handlelowClick}>Convert to Lowercase</button>
-    <button className="btn btn-info mx-2" onClick={cleartext}>Clear Text</button>
-    <button className="btn btn-info mx-2" onClick={downloadText}>download</button>
-    <button className="btn btn-info mx-2" onClick={hanldeSpaces}>remove extra-spaces</button>
+    <button disabled={text.length===0} className="btn btn-info mx-1 my-1" onClick={handleClick}>Convert to Uppercase</button>
+    <button disabled={text.length===0} className="btn btn-info mx-1 my-1" onClick={handlelowClick}>Convert to Lowercase</button>
+    <button disabled={text.length===0} className="btn btn-info mx-1 my-1" onClick={cleartext}>Clear Text</button>
+    <button disabled={text.length===0} className="btn btn-info mx-1 my-1" onClick={downloadText}>download</button>
+    <button disabled={text.length===0} className="btn btn-info mx-1 my-1" onClick={hanldeSpaces}>remove extra-spaces</button>
 
     </div>
 
     <div className={`conatiner my-3 text-${props.mode==='dark'?'light':'dark'}`}>
         <h2>Text Summary</h2>
-        <p>{text.split(" ").length} words and total characters are {text.length}</p>
-        <p>{0.008* text.split(" ").length} minutes take to read</p>
+        <p>{text.split(/\s+/).filter((a)=>{return a!=0}).length} words and total characters are {text.length}</p>
+        <p>{0.008* text.split(" ").filter((a)=>{return a!=0}).length} minutes take to read</p>
         <h2>Preview</h2>
         <p>{text.length>0 ? text:"Enter something in text-box to preview it here"}</p>
     </div>
